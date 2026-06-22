@@ -1,4 +1,4 @@
-//gcc -m32 jogo.c -o jogo.exe -I"C:\allegro-5.0.10-mingw-4.7.0\include" -L"C:\allegro-5.0.10-mingw-4.7.0\lib" -lallegro-5.0.10-monolith-mt
+//gcc -m32 chain.c -o chain.exe -I"C:\allegro-5.0.10-mingw-4.7.0\include" -L"C:\allegro-5.0.10-mingw-4.7.0\lib" -lallegro-5.0.10-monolith-mt    por alguma razao (pelo oq pesquise é por ser 32 bits e a versão ser incopativel com windows 10), tive q modificar e usar esse comando acima para compilar de inicio, dps editei o arquivo do makefile e funcionou com o mingw32-make, se n complilar com o mingw32-make, com o comando acima vai funcionar mudando os diretorios. 
 
 //mingw32-make
 
@@ -70,7 +70,7 @@ typedef struct Enemy {
 	Ship ship;
 	float raio;
 	int active;
-	Tiro explosao; // para reaacao em cadei se o inimigo morrer
+	Tiro explosao; // para reaacao em cadeia se o inimigo morrer
 } Enemy;
 
 
@@ -126,7 +126,6 @@ void drawHero(Hero s) {
 	al_draw_text(FONT_32, s.ship.cor, 100, 20, 0, score_txt);	
 
 	al_draw_circle(s.ship.tiro.x, s.ship.tiro.y, s.ship.tiro.raio, s.ship.tiro.cor, BORDA_TIRO);
-
 
 }
 
@@ -297,7 +296,7 @@ int pontuacaoRecorde(float pontuacao) {
     if(pontuacao > recordeAtual) {
         file = fopen("recorde.txt", "w");
         if(file != NULL) {
-            fprintf(file, "%f", pontuacao);
+            fprintf(file, "%d", pontuacao);
             fclose(file);
 			return 1;
         }
